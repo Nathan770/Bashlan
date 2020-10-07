@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Bashlan</string>
+
+    <string name="facebook_app_id">742551063142989</string>
+    <string name="fb_login_protocol_scheme">fb742551063142989</string>
+
+    <string name="API_KEY">1bb8c9f4a91244b0b30732793c05edab</string>
+
+    <string name="fridge">Fridge</string>
+    <string name="shopping">Shopping</string>
+    <string name="recipes">Recipes</string>
+    <string name="profile">Profile</string>
+    <string name="menu">Menu</string>
+    <string name="fruit">Fruit</string>
+    <string name="product">Product</string>
+    <string name="instructions">Instructions</string>
+    <string name="makeTime">Time to make</string>
+    <string name="missIngrediant">Missing ingrediant</string>
+    <string name="titleRecipe">Recipe Title</string>
+    <string name="mail">Mail</string>
+    <string name="name">Name</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="get_your_imc">Get your IMC</string>
+    <string name="your_imc_is">"Your IMC is : "</string>
+    <string name="back">Back</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="title">Bashlan</string>
+    <string name="login">Login</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="phone">Phone</string>
+    <string name="home">Home</string>
+    <string name="logout">Logout</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="rate">Rate</string>
+
+
+</resources>
