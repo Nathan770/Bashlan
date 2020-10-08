@@ -1,25 +1,32 @@
 package com.example.bashlan;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toolbar;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "nathan";
 
     private BottomNavigationView main_BNV_menu;
     private MaterialToolbar main_TLB_title;
+    private DrawerLayout main_LAY_main;
+    private NavigationView main_NGV_side;
 
     private ArrayList<ProductData> listProduct;
     private ArrayList<ProductData> listShopping;
@@ -29,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViews();
+        addSide();
         initList();
         initFragmentsFridge();
+
 
         main_BNV_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -62,6 +71,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void addSide() {
+        main_NGV_side.bringToFront();
+        setSupportActionBar(main_TLB_title);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,main_LAY_main,main_TLB_title,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        main_LAY_main.addDrawerListener(toggle);
+        toggle.syncState();
+        main_NGV_side.setNavigationItemSelectedListener(this);
     }
 
     private void initList() {
@@ -128,5 +146,21 @@ public class MainActivity extends AppCompatActivity {
     private void findViews() {
         main_BNV_menu = findViewById(R.id.main_BNV_menu);
         main_TLB_title = findViewById(R.id.main_TLB_title);
+        main_LAY_main = findViewById(R.id.main_LAY_main);
+        main_NGV_side = findViewById(R.id.main_NGV_side);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(main_LAY_main.isDrawerOpen(GravityCompat.START)){
+            main_LAY_main.closeDrawer(GravityCompat.START);
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return true;
     }
 }
