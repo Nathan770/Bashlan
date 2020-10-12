@@ -94,7 +94,7 @@ public class Fragment_instruction extends Fragment {
 
     private void httpInstruction(String url) {
         Log.d(TAG, "httpInstruction: start");
-        runThread();
+        toast("Loading Instruction ...");
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)
@@ -123,9 +123,10 @@ public class Fragment_instruction extends Fragment {
                             Log.d(TAG, "instruction " + instruction.get("step").toString());
                             listInstruction.add("Step " + (i + 1) + " : " + instruction.get("step").toString());
                         }
+                        runThread();
                     } catch (JSONException e) {
                         Log.d(TAG, "onResponse: " + e.getMessage().toString());
-                        failToast("Fail to have recipes please reload");
+                        toast("Fail to have recipes please reload");
                         e.printStackTrace();
                     }
 
@@ -140,7 +141,7 @@ public class Fragment_instruction extends Fragment {
         });
     }
 
-    private void failToast(final String message) {
+    private void toast(final String message) {
 
         new Thread() {
             public void run() {
@@ -163,7 +164,6 @@ public class Fragment_instruction extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(view.getContext(), "Loading Instruction ...", Toast.LENGTH_SHORT).show();
                         addInstruction();
                     }
                 });

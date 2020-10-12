@@ -40,7 +40,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-public class Activity_start extends AppCompatActivity implements Activity_dialog.ActivityDialogListener {
+public class Activity_start extends AppCompatActivity implements Activity_dialog.ActivityDialogListener{
     private static final String TAG = "nathan";
     private static final int RC_SIGN_IN = 100;
     private FirebaseAuth mAuth;
@@ -49,6 +49,7 @@ public class Activity_start extends AppCompatActivity implements Activity_dialog
     private String password = "";
     private String mUrl = "";
     private boolean loginByMail = false;
+
 
 
     private SignInButton start_BTN_signGoogle;
@@ -67,41 +68,53 @@ public class Activity_start extends AppCompatActivity implements Activity_dialog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         findViews();
-        checkLogout();
         checkLogin();
+        checkLogout();
         btnAction();
 
     }
 
     private void checkLogin() {
-        if (AccessToken.isCurrentAccessTokenActive()) {
-            Log.d(TAG, "onCreate: login by facebook");
-            goToActivity(mUrl);
-        } else if (GoogleSignIn.getLastSignedInAccount(this.getApplicationContext()) != null) {
-            Log.d(TAG, "onCreate: login by google");
-            goToActivity(mUrl);
-        } else if (loginByMail) {
-            Log.d(TAG, "onCreate: login by mail");
-            goToActivity(mUrl);
+        try{
+            if(AccessToken.isCurrentAccessTokenActive()){
+                Log.d(TAG, "onCreate: login by facebook");
+                goToActivity(mUrl);
+            }else if (GoogleSignIn.getLastSignedInAccount(this.getApplicationContext()) != null){
+                Log.d(TAG, "onCreate: login by google");
+                goToActivity(mUrl);
+            }else if(loginByMail){
+                Log.d(TAG, "onCreate: login by mail");
+                goToActivity(mUrl);
+            }
+        }catch (Exception e){
+            Log.d(TAG, "checkLogin: "+e.getMessage());
+            Toast.makeText(this,""+e.getMessage(),Toast.LENGTH_SHORT);
         }
+
     }
 
     private void checkLogout() {
-        boolean check = false;
-        check = getIntent().getBooleanExtra("logout", check);
-        if (check == true) {
-            if (AccessToken.isCurrentAccessTokenActive()) {
-                Log.d(TAG, "onCreate: login by facebook");
-                LoginManager.getInstance().logOut();
-            } else if (GoogleSignIn.getLastSignedInAccount(this.getApplicationContext()) != null) {
-                Log.d(TAG, "onCreate: login by google");
-                mGoogleSignInClient.signOut();
-            } else if (loginByMail) {
-                Log.d(TAG, "onCreate: login by mail");
-                loginByMail = false;
+        try{
+            boolean check = false;
+            check = getIntent().getBooleanExtra("logout",check);
+            if(check == true){
+                if(AccessToken.isCurrentAccessTokenActive()){
+                    Log.d(TAG, "onCreate: logout by facebook");
+                    LoginManager.getInstance().logOut();
+                }else if (GoogleSignIn.getLastSignedInAccount(this.getApplicationContext()) != null){
+                    Log.d(TAG, "onCreate: logout by google");
+                    mGoogleSignInClient.signOut();
+                }else if(loginByMail){
+                    Log.d(TAG, "onCreate: logout by mail");
+                    loginByMail = false;
+                }
+                check = false;
             }
-            check = false;
+        }catch (Exception e){
+            Log.d(TAG, "checkLogout: "+e.getMessage());
+            Toast.makeText(this,""+e.getMessage(),Toast.LENGTH_SHORT);
         }
+
     }
 
     private void btnAction() {
@@ -143,9 +156,9 @@ public class Activity_start extends AppCompatActivity implements Activity_dialog
                                 name = (String) object.get("name");
                                 email = (String) object.get("email");
                             } catch (JSONException e) {
-                                Log.d(TAG, "JSONException : " + e.getMessage());
+                                Log.d(TAG, "JSONException : "+e.getMessage());
                             }
-                            mUrl = "https://graph.facebook.com/" + loginResult.getAccessToken().getUserId() + "/picture?return_ssl_resources=1";
+                            mUrl = "https://graph.facebook.com/"+loginResult.getAccessToken().getUserId()+"/picture?return_ssl_resources=1";
                             goToActivity(mUrl);
                         }
                     });
@@ -168,29 +181,29 @@ public class Activity_start extends AppCompatActivity implements Activity_dialog
     View.OnClickListener mailAndPasswordListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (start_EDT_email.getEditText().getText().toString() == null || start_EDT_email.getEditText().getText().toString().equals("")) {
-                Toast.makeText(getApplicationContext(), "Fail to login email empty", Toast.LENGTH_SHORT).show();
-            } else if (start_EDT_password.getEditText().getText().toString() == null || start_EDT_password.getEditText().getText().toString().equals("")) {
-                Toast.makeText(getApplicationContext(), "Fail to login password empty", Toast.LENGTH_SHORT).show();
-            } else {
-                mAuth.signInWithEmailAndPassword(start_EDT_email.getEditText().getText().toString(), start_EDT_password.getEditText().getText().toString())
-                        .addOnCompleteListener(Activity_start.this, new OnCompleteListener<AuthResult>() {
+            if(start_EDT_email.getEditText().getText().toString() == null || start_EDT_email.getEditText().getText().toString().equals("")){
+                Toast.makeText(getApplicationContext(),"Fail to login email empty",Toast.LENGTH_SHORT).show();
+            }else if(start_EDT_password.getEditText().getText().toString() == null || start_EDT_password.getEditText().getText().toString().equals("")){
+                Toast.makeText(getApplicationContext(),"Fail to login password empty",Toast.LENGTH_SHORT).show();
+            }else {
+                mAuth.signInWithEmailAndPassword(start_EDT_email.getEditText().getText().toString(),start_EDT_password.getEditText().getText().toString())
+                        .addOnCompleteListener(Activity_start.this,new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                try {
-                                    if (task.isSuccessful()) {
+                                try{
+                                    if(task.isSuccessful()){
                                         Log.d(TAG, "onComplete: login " + task.isSuccessful());
-                                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_SHORT).show();
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         updateUI(user);
                                         loginByMail = true;
                                         goToActivity("");
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "Fail to login " + task.getException().getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    }else {
+                                        Toast.makeText(getApplicationContext(),"Fail to login "+task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
                                     }
-                                } catch (Exception e) {
-                                    Log.d(TAG, "onException: " + e.getMessage().toString());
-                                    Toast.makeText(getApplicationContext(), "Fail to login " + e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                }catch (Exception e){
+                                    Log.d(TAG, "onException: "+e.getMessage().toString());
+                                    Toast.makeText(getApplicationContext(),"Fail to login "+e.getMessage().toString(),Toast.LENGTH_SHORT).show();
                                 }
 
                             }
@@ -204,13 +217,13 @@ public class Activity_start extends AppCompatActivity implements Activity_dialog
         Intent intent = new Intent(Activity_start.this, MainActivity.class);
         intent.putExtra("email", email);
         intent.putExtra("name", name);
-        intent.putExtra("urlPicture", url);
+        intent.putExtra("urlPicture",url);
         startActivity(intent);
     }
 
     private void openDialog() {
         Activity_dialog activity_dialog = new Activity_dialog();
-        activity_dialog.show(getSupportFragmentManager(), "activity dialog");
+        activity_dialog.show(getSupportFragmentManager(),"activity dialog");
     }
 
     private void findViews() {
@@ -301,23 +314,23 @@ public class Activity_start extends AppCompatActivity implements Activity_dialog
 
     @Override
     public void getInfoUser(String mName, final String mEmail, final String mPassword) {
-        email = mEmail;
-        name = mName;
-        password = mPassword;
+            email = mEmail;
+            name = mName;
+            password = mPassword;
 
-        if (mPassword.length() <= 6) {
-            Toast.makeText(this, "Password should be at least 6 characters", Toast.LENGTH_LONG).show();
-        } else if (mEmail.equals("") || mName.equals("")) {
-            Toast.makeText(this, "Name or Email is empty \n Try again !", Toast.LENGTH_LONG).show();
-        } else {
+            if (mPassword.length() <= 6){
+                Toast.makeText(this, "Password should be at least 6 characters", Toast.LENGTH_LONG).show();
+            }else if(mEmail.equals("") ||  mName.equals("")) {
+                Toast.makeText(this, "Name or Email is empty \n Try again !", Toast.LENGTH_LONG).show();
+            }else {
 
-            mAuth.createUserWithEmailAndPassword(mEmail, mPassword)
+            mAuth.createUserWithEmailAndPassword(mEmail,mPassword)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+                            if(task.isSuccessful()){
                                 Log.d(TAG, "onComplete: reussi " + task.isSuccessful());
-                                Toast.makeText(getApplicationContext(), "Subsribe Successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Subsribe Successful",Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -328,14 +341,14 @@ public class Activity_start extends AppCompatActivity implements Activity_dialog
                                 user1.updateProfile(profileUpdates);
 
                                 updateUI(user);
-                            } else {
-                                Log.d(TAG, "onfail: " + task.getResult());
-                                Toast.makeText(getApplicationContext(), "Fail to  Subsribe " + task.getException().getMessage().toString(), Toast.LENGTH_SHORT).show();
+                            }else {
+                                Log.d(TAG, "onfail: "+ task.getResult());
+                                Toast.makeText(getApplicationContext(),"Fail to  Subsribe "+task.getException().getMessage().toString(),Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
 
-        }
+            }
 
     }
 }
