@@ -3,16 +3,22 @@ package com.example.bashlan;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import android.annotation.SuppressLint;
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toolbar;
+import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -39,30 +45,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         addSide();
         initList();
         initFragmentsFridge();
-
-
         main_BNV_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.page_fridge:
                         main_TLB_title.setTitle("Fridge");
-                        main_TLB_title.setNavigationIcon(R.drawable.ic_fridge);
+                        main_TLB_title.getMenu().findItem(R.id.bar_side_icon).setIcon(R.drawable.ic_fridge);
                         initFragmentsFridge();
                         break;
                     case R.id.page_shopping:
                         main_TLB_title.setTitle("Shopping");
-                        main_TLB_title.setNavigationIcon(R.drawable.ic_shopping_cart);
+                        main_TLB_title.getMenu().findItem(R.id.bar_side_icon).setIcon(R.drawable.ic_shopping_cart);
                         initFragmentsShopping();
                         break;
                     case R.id.page_recipe:
                         main_TLB_title.setTitle("Recipes");
-                        main_TLB_title.setNavigationIcon(R.drawable.ic_recipe);
+                        main_TLB_title.getMenu().findItem(R.id.bar_side_icon).setIcon(R.drawable.ic_recipe);
                         initFragmentsRecipe();
                         break;
                     case R.id.page_profile:
                         main_TLB_title.setTitle("Profile");
-                        main_TLB_title.setNavigationIcon(R.drawable.ic_profile);
+                        main_TLB_title.getMenu().findItem(R.id.bar_side_icon).setIcon(R.drawable.ic_profile);
                         initFragmentsProfile();
                         break;
                 }
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void addSide() {
         main_NGV_side.bringToFront();
         setSupportActionBar(main_TLB_title);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,main_LAY_main,main_TLB_title,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, main_LAY_main, main_TLB_title, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         main_LAY_main.addDrawerListener(toggle);
         toggle.syncState();
         main_NGV_side.setNavigationItemSelectedListener(this);
@@ -134,8 +138,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initFragmentsProfile() {
-        String email = getIntent().getStringExtra("email");
-        String name = getIntent().getStringExtra("name");
+        String email = "";
+        email = getIntent().getStringExtra("email");
+        String name = "";
+        name = getIntent().getStringExtra("name");
         String urlPicture = getIntent().getStringExtra("urlPicture");
         Fragment_profile fragment_profile = Fragment_profile.newInstance(email, name, urlPicture);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -152,15 +158,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if(main_LAY_main.isDrawerOpen(GravityCompat.START)){
+        if (main_LAY_main.isDrawerOpen(GravityCompat.START)) {
             main_LAY_main.closeDrawer(GravityCompat.START);
-        }else {
-            super.onBackPressed();
+        } else {
+            FragmentManager fm = getFragmentManager();
+            if (fm.getBackStackEntryCount() > 0) {
+                Log.i("MainActivity", "popping backstack");
+                fm.popBackStack();
+            } else {
+                Log.i("MainActivity", "nothing on backstack, calling super");
+                super.onBackPressed();
+            }
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_logout:
+                goToActivity();
+            case R.id.menu_rate:
+                Toast.makeText(this, "Thanks you for use my app", Toast.LENGTH_LONG);
+        }
+
         return true;
+    }
+
+    private void goToActivity() {
+        Intent intent = new Intent(MainActivity.this, Activity_start.class);
+        boolean exit = true;
+        intent.putExtra("logout", exit);
+        startActivity(intent);
+    }
+
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (menu instanceof MenuBuilder) {
+            ((MenuBuilder) menu).setOptionalIconsVisible(true);
+        }
+        getMenuInflater().inflate(R.menu.top_app_bar, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

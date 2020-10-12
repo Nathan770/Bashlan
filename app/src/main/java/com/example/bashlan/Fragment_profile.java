@@ -30,7 +30,7 @@ public class Fragment_profile extends Fragment {
     private TextView profile_LBL_imc;
     private ImageView profile_IMG_personne;
 
-    public static Fragment_profile newInstance(String email,String name,String urlPicture) {
+    public static Fragment_profile newInstance(String email, String name, String urlPicture) {
         Fragment_profile fragment = new Fragment_profile();
         fragment.mEmail = email;
         fragment.mName = name;
@@ -63,18 +63,18 @@ public class Fragment_profile extends Fragment {
                 double imc = 0.0;
                 String weight = profile_EDT_weight.getEditText().getText().toString();
                 String height = profile_EDT_height.getEditText().getText().toString();
-                if((!weight.equals("")) && (!height.equals(""))){
+                if ((!weight.equals("")) && (!height.equals(""))) {
                     double wei = Integer.parseInt(weight.toString());
                     double hei = Integer.parseInt(height.toString());
 
-                    imc = (wei/((hei*hei)/10000));
+                    imc = (wei / ((hei * hei) / 10000));
                     profile_LBL_imc.setText(String.format("Your IMC is : %.2f", imc));
                 }
-                if(imc > 25){
+                if (imc > 25) {
                     Toast.makeText(view.getContext(), "You are in over weight", Toast.LENGTH_SHORT).show();
-                }else if(imc < 18.5){
+                } else if (imc < 18.5) {
                     Toast.makeText(view.getContext(), "You are thin CONTINUE !!!", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(view.getContext(), "You are in a good shape", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -83,17 +83,17 @@ public class Fragment_profile extends Fragment {
     }
 
     private void changeProfile() {
-        if (!mEmail.equals("")){
+        if (!mEmail.equals("")) {
             profile_LBL_email.setText(mEmail);
         }
-        if(mName == null){
+        if (mName == null) {
             profile_LBL_name.setText("No name");
-        }else if (!mName.equals("")) {
+        } else if (!mName.equals("")) {
             profile_LBL_name.setText(mName);
         }
-        if(mUrlPicture.equals("")){
-           profile_IMG_personne.setImageResource(R.drawable.ic_profile);
-        }else{
+        if (mUrlPicture.equals("")) {
+            profile_IMG_personne.setImageResource(R.drawable.ic_profile);
+        } else {
             Glide
                     .with(view.getContext())
                     .load(mUrlPicture)

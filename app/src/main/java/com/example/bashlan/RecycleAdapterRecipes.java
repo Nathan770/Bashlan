@@ -49,7 +49,7 @@ public class RecycleAdapterRecipes extends RecyclerView.Adapter<RecycleAdapterRe
     }
 
     public void setClickListeners(RecipesItemClickListener recipesItemClickListener) {
-        this.recipesItemClickListener  = recipesItemClickListener;
+        this.recipesItemClickListener = recipesItemClickListener;
     }
 
     @NonNull
@@ -69,8 +69,7 @@ public class RecycleAdapterRecipes extends RecyclerView.Adapter<RecycleAdapterRe
         final RecipesData currentItem = recipesData.get(position);
 
 
-
-        int cookTime = new Random().nextInt(30)+30 ;
+        int cookTime = new Random().nextInt(30) + 30;
         holder.recycle_IMG_recipes.setImageResource(R.drawable.ic_missing_recipes);
 
         Glide
@@ -80,8 +79,8 @@ public class RecycleAdapterRecipes extends RecyclerView.Adapter<RecycleAdapterRe
                 .into(holder.recycle_IMG_recipes);
 
         holder.recycle_LBL_title_recipes.setText(currentItem.getTitle());
-        holder.recycle_LBL_missig_recipes.setText("Missing Ingrediant : "+currentItem.getMissedIngredientCount());
-        holder.recycle_LBL_time_recipes.setText("Cook Time : "+cookTime+" min");
+        holder.recycle_LBL_missig_recipes.setText("Missing Ingrediant : " + currentItem.getMissedIngredientCount());
+        holder.recycle_LBL_time_recipes.setText("Cook Time : " + cookTime + " min");
 
         holder.recycle_BTN_instruction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +95,9 @@ public class RecycleAdapterRecipes extends RecyclerView.Adapter<RecycleAdapterRe
         return recipesData.size();
     }
 
-    RecipesData getItem(int position) { return recipesData.get(position); }
-
+    RecipesData getItem(int position) {
+        return recipesData.get(position);
+    }
 
 
 }

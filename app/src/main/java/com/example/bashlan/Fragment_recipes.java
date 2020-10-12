@@ -65,7 +65,7 @@ public class Fragment_recipes extends Fragment {
         String apiUrl = "&apiKey=" + getString(R.string.API_KEY);
         final ArrayList<JSONObject> recipesJson;
         recipesJson = new ArrayList<>();
-
+        runWait();
         for (ProductData i : listProduct) {
             if (i.isHaving()) {
                 ingredientsUrl += i.getName() + ",+";
@@ -103,7 +103,7 @@ public class Fragment_recipes extends Fragment {
                                 Log.d(TAG, "id = " + i.get("id") + " title = " + i.get("title") + " image = " + i.get("image"));
                                 listRecipes.add(new RecipesData((int) i.get("id"), (String) i.get("title"), (String) i.get("image"), 1));
                             }
-                            runThread();
+                            runToAct();
                         } catch (JSONException e) {
                             Log.d(TAG, "httpRec Exception : " + e.getMessage());
                         }
@@ -141,7 +141,7 @@ public class Fragment_recipes extends Fragment {
             String url = "";
             url = getInstruction(item);
 
-            Fragment_instruction fragment_instruction = Fragment_instruction.newInstance(url,listProduct);
+            Fragment_instruction fragment_instruction = Fragment_instruction.newInstance(url, listProduct);
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.main_LAY_app, fragment_instruction);
             transaction.commit();
@@ -163,14 +163,28 @@ public class Fragment_recipes extends Fragment {
         return url;
     }
 
-    private void runThread() {
+    private void runToAct() {
         new Thread() {
             public void run() {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(view.getContext(), "Loading recipes ...", Toast.LENGTH_SHORT).show();
                         addToActivity();
+                    }
+                });
+
+            }
+
+        }.start();
+    }
+
+    private void runWait() {
+        new Thread() {
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(view.getContext(), "Loading recipes ...", Toast.LENGTH_LONG).show();
                     }
                 });
 

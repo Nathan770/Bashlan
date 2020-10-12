@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,7 +50,7 @@ public class Activity_dialog extends AppCompatDialogFragment {
                         email = dialog_EDT_email.getEditText().getText().toString();
                         password = dialog_EDT_password.getEditText().getText().toString();
 
-                        listener.getInfoUser(name,email,password);
+                        listener.getInfoUser(name, email, password);
                     }
                 });
 
@@ -65,14 +65,14 @@ public class Activity_dialog extends AppCompatDialogFragment {
         super.onAttach(context);
         try {
             listener = (ActivityDialogListener) context;
-        }catch (ClassCastException e){
-            Log.d(TAG, "onAttach: "+e.getMessage());
-            throw new ClassCastException(context.toString()+"must implement ActivityDialogListener");
+        } catch (ClassCastException e) {
+            Log.d(TAG, "onAttach: " + e.getMessage());
+            throw new ClassCastException(context.toString() + "must implement ActivityDialogListener");
         }
 
     }
 
-    public interface ActivityDialogListener{
-         void getInfoUser(String name, String email,String password);
+    public interface ActivityDialogListener {
+        void getInfoUser(String name, String email, String password);
     }
 }

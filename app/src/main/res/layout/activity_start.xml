@@ -6,38 +6,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity_start">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:orientation="horizontal"
-           android:background="@drawable/ic_wave"
-           android:layout_weight="60">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/ic_wave"
+            android:layout_weight="60">
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="10dp"
-               android:layout_marginTop="20dp"
-               android:fontFamily="cursive"
-               android:text="@string/title"
-               android:textColor="#FFFFFF"
-               android:textSize="20pt"
-               android:textStyle="italic" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="cursive"
+                android:text="@string/title"
+                android:textColor="#FFFFFF"
+                android:textSize="20pt"
+                android:textStyle="italic" />
 
-           <ImageView
-               android:layout_width="100dp"
-               android:layout_height="100dp"
-               app:srcCompat="@drawable/ic_bashlan_white"
-               android:layout_marginTop="20dp"
-               android:layout_marginStart="140dp"/>
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/ic_bashlan_white"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="140dp" />
 
-       </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,8 +93,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    />
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
-                app:cornerRadius="15dp"/>
+                app:cornerRadius="15dp" />
 
             <TextView
                 android:id="@+id/start_LBL_forgot"
@@ -111,7 +111,8 @@
                 android:text="@string/forgot_password"
                 android:textColor="@color/colorPrimary"
                 android:clickable="true"
-                android:gravity="center"/>
+                android:gravity="center" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,13 +124,13 @@
                 <com.google.android.gms.common.SignInButton
                     android:id="@+id/start_BTN_signGoogle"
                     android:layout_width="200dp"
-                    android:layout_height="35dp"/>
+                    android:layout_height="35dp" />
 
                 <com.facebook.login.widget.LoginButton
                     android:id="@+id/start_BTN_signFacebook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/start_BTN_create"
@@ -138,7 +139,7 @@
                     android:text="@string/create_an_account"
                     app:cornerRadius="15dp"
                     android:textColor="#FFFFFF"
-                    android:layout_marginTop="70dp"/>
+                    android:layout_marginTop="70dp" />
 
             </LinearLayout>
         </LinearLayout>

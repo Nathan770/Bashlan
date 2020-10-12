@@ -36,8 +36,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/titleRecipe"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
                 <TextView
                     android:id="@+id/recycle_LBL_missig_recipes"
                     android:layout_width="wrap_content"
@@ -45,8 +45,8 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/missIngrediant"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textColor="?android:attr/textColorSecondary" />
+
                 <TextView
                     android:id="@+id/recycle_LBL_time_recipes"
                     android:layout_width="wrap_content"
@@ -54,8 +54,8 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/makeTime"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textColor="?android:attr/textColorSecondary" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/recycle_BTN_instruction"
                     android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="@string/instructions"
                     android:layout_marginTop="8dp"
-                    app:cornerRadius="50dp"/>
+                    app:cornerRadius="50dp" />
 
             </LinearLayout>
 

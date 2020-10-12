@@ -4,8 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
-    android:padding="8dp"
-    android:elevation="6dp">
+    android:padding="12dp"
+    android:elevation="8dp"
+    android:layout_marginBottom="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,31 +17,33 @@
         <LinearLayout
             android:id="@+id/recycle_LAY_all"
             android:layout_width="362dp"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="start"
             android:orientation="horizontal">
 
 
             <ImageView
                 android:id="@+id/recycle_IMG_product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="9dp"
                 app:srcCompat="@drawable/ic_product" />
 
             <TextView
                 android:id="@+id/recycle_LBL_product"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="5dp"
                 android:text="@string/product" />
 
 
         </LinearLayout>
+
         <CheckBox
             android:id="@+id/recycle_CBO_product"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:checked="true"
-            android:layout_toRightOf="@id/recycle_LAY_all"/>
+            android:layout_toRightOf="@id/recycle_LAY_all" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

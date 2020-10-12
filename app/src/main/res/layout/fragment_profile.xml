@@ -52,71 +52,72 @@
             android:layout_marginTop="30dp"
             android:orientation="vertical">
 
-           <LinearLayout
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:layout_marginStart="20dp">
-
             <LinearLayout
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp">
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/profile_EDT_weight"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="@string/weight">
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputEditText
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/profile_EDT_weight"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="@string/weight">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/profile_EDT_height"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="@string/height">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="150dp"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/profile_BTN_imc"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:orientation="vertical">
+                android:text="@string/get_your_imc"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="20dp" />
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/profile_EDT_height"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="@string/height">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-           </LinearLayout>
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/profile_BTN_imc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/get_your_imc"
-                    android:layout_marginStart="100dp"
-                    android:layout_marginTop="20dp"/>
-
-                <TextView
-                    android:id="@+id/profile_LBL_imc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/your_imc_is"
-                    android:textStyle="bold"
-                    android:layout_marginStart="130dp"
-                    android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/profile_LBL_imc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/your_imc_is"
+                android:textStyle="bold"
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
 

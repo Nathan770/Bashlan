@@ -1,18 +1,12 @@
 package com.example.bashlan;
 
 
-
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,15 +35,15 @@ public class Fragment_instruction extends Fragment {
     private TextView instruction_LBL_all;
     private MaterialButton instruction_BTN_back;
     private String mUrl = "";
-    private ArrayList<String> listInstruction ;
+    private ArrayList<String> listInstruction;
     private ArrayList<ProductData> mlistProduct;
 
 
-    public static Fragment_instruction newInstance(String url,ArrayList<ProductData> listProduct) {
+    public static Fragment_instruction newInstance(String url, ArrayList<ProductData> listProduct) {
         Fragment_instruction fragment = new Fragment_instruction();
         fragment.mUrl = url;
         fragment.mlistProduct = listProduct;
-        Log.d(TAG, "newInstance: "+url);
+        Log.d(TAG, "newInstance: " + url);
         return fragment;
     }
 
@@ -71,7 +65,7 @@ public class Fragment_instruction extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
-                tx.replace( R.id.main_LAY_app, Fragment_recipes.newInstance(mlistProduct) ).addToBackStack( "tag" ).commit();
+                tx.replace(R.id.main_LAY_app, Fragment_recipes.newInstance(mlistProduct)).addToBackStack("tag").commit();
             }
         });
 
@@ -79,9 +73,9 @@ public class Fragment_instruction extends Fragment {
     }
 
     private void addInstruction() {
-        Log.d(TAG, "addInstruction: "+listInstruction.size() +" have in " + listInstruction.toString());
+        Log.d(TAG, "addInstruction: " + listInstruction.size() + " have in " + listInstruction.toString());
         for (int i = 0; i < listInstruction.size(); i++) {
-            instruction_LBL_all.setText(instruction_LBL_all.getText() +" \n \n" +listInstruction.get(i).toString());
+            instruction_LBL_all.setText(instruction_LBL_all.getText() + " \n \n" + listInstruction.get(i).toString());
         }
     }
 
@@ -95,16 +89,12 @@ public class Fragment_instruction extends Fragment {
     public void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: back press");
-        Fragment_recipes fragment_recipe = Fragment_recipes.newInstance(mlistProduct);
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_LAY_app, fragment_recipe);
-        transaction.commit();
     }
 
 
     private void httpInstruction(String url) {
         Log.d(TAG, "httpInstruction: start");
-
+        runThread();
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)
@@ -127,18 +117,15 @@ public class Fragment_instruction extends Fragment {
                         JSONObject jsonObject1 = (JSONObject) responseJson.get(0);
                         Log.d(TAG, "first" + jsonObject1);
                         JSONArray steps = (JSONArray) jsonObject1.get("steps");
-                        JSONArray ingre = (JSONArray) jsonObject1.get("ingrediant");
-                        Log.d(TAG, "ingrdiante: "+ingre);
 
                         for (int i = 0; i < steps.length(); i++) {
                             JSONObject instruction = (JSONObject) steps.get(i);
-                            Log.d(TAG, "instruction "+instruction.get("step").toString());
+                            Log.d(TAG, "instruction " + instruction.get("step").toString());
                             listInstruction.add("Step " + (i + 1) + " : " + instruction.get("step").toString());
                         }
-                            runThread();
                     } catch (JSONException e) {
-                        Log.d(TAG, "onResponse: "+e.getMessage().toString());
-                        failToast("Fail to have recipes \n please reload");
+                        Log.d(TAG, "onResponse: " + e.getMessage().toString());
+                        failToast("Fail to have recipes please reload");
                         e.printStackTrace();
                     }
 
@@ -160,7 +147,7 @@ public class Fragment_instruction extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(view.getContext(), ""+message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), "" + message, Toast.LENGTH_SHORT).show();
                     }
                 });
 
