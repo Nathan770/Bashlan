@@ -68,8 +68,9 @@ public class Activity_start extends AppCompatActivity implements Activity_dialog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         findViews();
-        checkLogin();
         checkLogout();
+        checkLogin();
+
         btnAction();
 
     }
