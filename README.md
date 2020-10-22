@@ -9,9 +9,9 @@ You can also manage your food's shopping list through this app.
 The app uses the Spoonacular API and Firebase for register and login.
 
 Including :
- -Custum recipes
- -Shopping list
- -BMI calculator
+ - Custum recipes
+ - Shopping list
+ - BMI calculator
   
  
   Login page : 
