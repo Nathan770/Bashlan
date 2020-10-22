@@ -1,6 +1,6 @@
  # Bashlan
   
-  <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/logo_bashlan.png" width="100"/>
+  <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/bahshlan%20logo.png" width="100"/>
   
   Cooking application , use emlemente from your fridge to have recipes.
   
