@@ -1,14 +1,14 @@
  # Bashlan
   
   <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/bahshlan%20logo.png" width="100"/>
-  
+
+# About
 Cooking and food management application , finds recipes from food in your home.
 The application helps you on a daily basis by offerring a variety of recipes based on food products you have at home!
 You can also manage your food's shopping list through this app.
-The app uses the Spoonacular API and Firebase for register and login.
+The app uses the Spoonacular API and Firebase for register and login.  
 
-
-Including :
+# Including :
  - Custum recipes
  - Shopping list
  - BMI calculator
