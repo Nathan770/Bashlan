@@ -4,6 +4,8 @@
   
   Cooking application , use emlemente from your fridge to have recipes.
   
+  My application can help you on a daily basis, you enter into the application all the products you have at home and it offers you recipes based on it. For the recipes i use an API (spoonacular), with http requests. For authentication i use Firebase, i save user data on him Database. 
+  
   Including : 
   - Recipes 
   - Shopping list
