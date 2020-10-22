@@ -1,6 +1,6 @@
  # Bashlan
   
-  ![alt text](https://github.com/Nathan770/Bashlan/blob/master/app/src/main/res/drawable/ic_bashlan.xml)
+  <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/logo_bashlan.png" width="100"/>
   
   Cooking application , use emlemente from your fridge to have recipes.
   
