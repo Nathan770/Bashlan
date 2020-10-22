@@ -10,14 +10,29 @@
   - Your IMC
   
  
-                          Login page : 
+  Login page : 
  
   <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/start%20page.jpeg" width="200"/>
   
-  ##Fridge page
+  Menu :
+  
+  <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/menu%20page.jpeg" width="200"/>
+  
+  Fridge page : 
   
   <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/fridge%20page.jpeg" width="200"/>
-    
-    
   
+  Recipes page : 
+  
+  <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/recipes%20page.jpeg" width="200"/>
+  
+  Profile page (check your IMC): 
+  
+  <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/profile%20page.jpeg" width="200"/>
+  
+  Shopping page : 
+  
+  <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/shopping%20page.jpeg" width="200"/>
+  
+    
   
