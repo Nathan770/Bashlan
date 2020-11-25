@@ -1,6 +1,7 @@
  # Bashlan
  
  ![](https://img.shields.io/badge/Version-1.00.00-red)
+ [![](https://img.shields.io/badge/APK-bashlan.apk-red)](https://github.com/Nathan770/Bashlan/blob/master/bashlan.apk)
   
   <img src="https://github.com/Nathan770/Bashlan/blob/master/readmePic/bahshlan%20logo.png" width="100"/>
 
